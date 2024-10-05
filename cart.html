@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Корзина</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cart-items">
+            <!-- Товары в корзине будут отображаться здесь -->
+        </section>
+
+        <section class="checkout">
+            <h3>Итого: <span id="total-price">0</span> руб.</h3>
+            <button onclick="checkout()">Оформить заказ</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Контакты: +7 (123) 456-78-90 | info@mebelshop.ru</p>
+    </footer>
+
+    <script>
+        // Функция для загрузки товаров из корзины
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let totalPrice = 0;
+
+            // Очищаем контейнер перед добавлением товаров
+            cartItemsContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                // Добавляем каждый товар в контейнер
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <h3>${item.name}</h3>
+                        <p>Цена: ${item.price} руб.</p>
+                    </div>
+                `;
+                totalPrice += item.price;
+            });
+
+            // Обновляем общую стоимость товаров
+            document.getElementById('total-price').innerText = totalPrice;
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        // Функция для оформления заказа (пока просто очищает корзину)
+        function checkout() {
+            alert("Ваш заказ оформлен!");
+            localStorage.removeItem('cart'); // Очищаем корзину
+            loadCart(); // Обновляем корзину
+        }
+
+        // Загрузка корзины при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
+

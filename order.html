@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Оформление заказа</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form action="submit_order.php" method="post">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="address">Адрес доставки:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <button type="submit">Оформить заказ</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Контакты: +7 (123) 456-78-90 | info@mebelshop.ru</p>
+    </footer>
+</body>
+</html>
