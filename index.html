@@ -21,28 +21,66 @@
         </nav>
     </header>
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чат поддержки</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Чат поддержки -->
+  <div class="chat-popup" id="chatBox">
+    <div class="chat-header">
+      <h4>Чат поддержки</h4>
+      <button class="close-btn" onclick="closeChat()">&times;</button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <p class="bot-message">Привет! Как я могу помочь?</p>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="userInput" placeholder="Введите ваше сообщение..." />
+      <button class="send-btn" onclick="sendMessage()">Отправить</button>
+    </div>
+  </div>
+
+  <!-- Кнопка для открытия чата -->
+  <button class="open-chat-btn" onclick="openChat()">Чат</button>
+
+  <!-- Подключение JS-файла -->
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
     <main>
-        <section class="categories">
-            <h2>Популярные категории</h2>
-            <div class="category-list">
-                <div class="category">
-                    <img src="images/sit.jpg" alt="Диваны">
-                    <h3>Диваны</h3>
-                </div>
-                <div class="category">
-                    <img src="images/beds.jpg" alt="Кровати">
-                    <h3>Кровати</h3>
-                </div>
-                <div class="category">
-                    <img src="images/table.jpg" alt="Столы">
-                    <h3>Столы</h3>
-                </div>
-                <div class="category">
-                    <img src="images/stul.jpg" alt="Стулья">
-                    <h3>Стулья</h3>
-                </div>
-            </div>
-        </section>
+<section class="popular-categories">
+    <h2>Популярные категории</h2>
+    <div class="category-buttons">
+        <div class="category-card">
+            <img src="images/sit.jpg" alt="Диваны">
+            <a href="sofa.html"><button class="category-btn">Диваны</button></a>
+        </div>
+        <div class="category-card">
+            <img src="images/beds.jpg" alt="Кровати">
+            <a href="beds.html"><button class="category-btn">Кровати</button></a>
+        </div>
+        <div class="category-card">
+            <img src="images/table.jpg" alt="Столы">
+            <a href="tables.html"><button class="category-btn">Столы</button></a>
+        </div>
+        <div class="category-card">
+            <img src="images/stul.jpg" alt="Стулья">
+            <a href="chairs.html"><button class="category-btn">Стулья</button></a>
+
+        </div>
+    </div>
+</section>
+
 
         <section class="featured-products">
             <h2>Популярные товары</h2>
