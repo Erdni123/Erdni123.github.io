@@ -569,3 +569,57 @@ footer {
   border-radius: 5px;
   cursor: pointer;
 }
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #333;
+}
+
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    padding: 14px 20px;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #575757;
+}
+
+.game-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 30px;
+}
+
+#gameCanvas {
+    border: 2px solid #333;
+}
+
+#leaderboard {
+    width: 200px;
+    border: 1px solid #333;
+    padding: 10px;
+}
+
+#leaderboard h3 {
+    margin: 0 0 10px;
+}
+
+#leaderboardList {
+    list-style-type: none;
+    padding: 0;
+}

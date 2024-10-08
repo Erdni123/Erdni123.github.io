@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        #gameOverText {
+            display: none;
+            color: red;
+            font-size: 24px;
+        }
+        #leaderboard {
+            list-style: none;
+        }
+        #redirectButton {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="gameOverText">Игра окончена!</div>
+    <ul id="leaderboard"></ul>
+    <button id="redirectButton">Перейти на мой сайт</button>
+
+    <script>
+        // Здесь вставьте ваш JavaScript-код, включая все функции и логику игры
+
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let player = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 30,
+            color: 'blue',
+            mass: 50,
+            speed: 2,
+            nickname: 'Player',
+            isAlive: true
+        };
+
+        let bots = [];
+        let splits = [];
+        let spheres = [];
+        let gameOverText = document.getElementById('gameOverText');
+        const maxBots = 10;
+        const maxSplits = 8;
+        const minMassToSplit = 20;
+        const sphereSpawnTime = 30000;
+        const respawnTime = 5000;
+
+        // Создание ботов
+        function createRandomBot() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 15 + 10,
+                color: getRandomColor(),
+                mass: Math.random() * 30 + 10,
+                speedX: (Math.random() - 0.5) * 2,
+                speedY: (Math.random() - 0.5) * 2,
+                nickname: generateRandomNickname()
+            };
+        }
+
+        // Начальные боты
+        for (let i = 0; i < maxBots; i++) {
+            bots.push(createRandomBot());
+        }
+
+        // Создание бонусной сферы
+        function createBonusSphere() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: 10,
+                color: 'gold',
+                mass: 30
+            };
+        }
+
+        // Начальные сферы
+        for (let i = 0; i < 5; i++) {
+            spheres.push(createBonusSphere());
+        }
+
+        // Управление мышью
+        let mouseX = player.x;
+        let mouseY = player.y;
+
+        canvas.addEventListener('mousemove', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = event.clientX - rect.left;
+            mouseY = event.clientY - rect.top;
+        });
+
+        // Деление на пробел
+        window.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                splitPlayer();
+            }
+        });
+
+        // Генерация случайного никнейма
+        function generateRandomNickname() {
+            const nicknames = ['BotMaster', 'Speedy', 'HeavyBall', 'QuickMove', 'LazyBot', 'Massive'];
+            return nicknames[Math.floor(Math.random() * nicknames.length)];
+        }
+
+        // Функция деления игрока
+        function splitPlayer() {
+            if (player.mass > minMassToSplit && splits.length < maxSplits) {
+                const splitMass = player.mass / 2;
+                const splitRadius = Math.sqrt(splitMass);
+
+                player.mass -= splitMass;
+                player.radius = Math.sqrt(player.mass);
+
+                const split = {
+                    x: player.x,
+                    y: player.y,
+                    radius: splitRadius,
+                    color: player.color,
+                    mass: splitMass,
+                    speedX: (Math.random() - 0.5) * 5,
+                    speedY: (Math.random() - 0.5) * 5,
+                    nickname: player.nickname
+                };
+
+                splits.push(split);
+            }
+        }
+
+        // Основная функция отрисовки игры
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (player.isAlive) {
+                drawCircle(player);
+                for (let split of splits) {
+                    drawCircle(split);
+                }
+            }
+
+            for (let bot of bots) {
+                drawCircle(bot);
+                ctx.fillStyle = 'white';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(bot.nickname, bot.x, bot.y - bot.radius - 5);
+            }
+
+            for (let sphere of spheres) {
+                drawCircle(sphere);
+            }
+
+            movePlayer();
+            moveSplits();
+            moveBots();
+            checkCollisions();
+            checkSpheres();
+
+            updateLeaderboard();
+
+            requestAnimationFrame(draw);
+        }
+
+        // Функция для обновления таблицы лидеров
+        function updateLeaderboard() {
+            const allPlayers = [...splits, player, ...bots];
+            allPlayers.sort((a, b) => b.mass - a.mass);
+
+            leaderboard.innerHTML = '';
+            allPlayers.slice(0, 10).forEach(p => {
+                let listItem = document.createElement('li');
+                listItem.textContent = `${p.nickname || 'Player'}: ${p.mass.toFixed(1)}`;
+                leaderboard.appendChild(listItem);
+            });
+        }
+
+        // Движение игрока к курсору
+        function movePlayer() {
+            if (!player.isAlive) return;
+
+            let dx = mouseX - player.x;
+            let dy = mouseY - player.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > player.speed) {
+                player.x += (dx / distance) * player.speed;
+                player.y += (dy / distance) * player.speed;
+            }
+        }
+
+        // Движение частиц после деления
+        function moveSplits() {
+            for (let split of splits) {
+                split.x += split.speedX;
+                split.y += split.speedY;
+            }
+        }
+
+        // Движение ботов
+        function moveBots() {
+            for (let bot of bots) {
+                bot.x += bot.speedX;
+                bot.y += bot.speedY;
+
+                const closestPlayer = [player, ...splits].reduce((closest, current) => {
+                    const distance = Math.hypot(current.x - bot.x, current.y - bot.y);
+                    return (closest.distance === null || distance < closest.distance)
+                        ? { distance, player: current }
+                        : closest;
+                }, { distance: null, player: null });
+
+                if (closestPlayer.player && closestPlayer.player.mass < bot.mass) {
+                    const dx = closestPlayer.player.x - bot.x;
+                    const dy = closestPlayer.player.y - bot.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance > 0) {
+                        bot.x += (dx / distance) * bot.speedX; 
+                        bot.y += (dy / distance) * bot.speedY; 
+                    }
+                }
+
+                if (bot.x <= 0 || bot.x >= canvas.width) bot.speedX *= -1;
+                if (bot.y <= 0 || bot.y >= canvas.height) bot.speedY *= -1;
+            }
+        }
+
+        // Проверка на столкновения
+        function checkCollisions() {
+            for (let i = bots.length - 1; i >= 0; i--) {
+                let bot = bots[i];
+                let dist = Math.hypot(player.x - bot.x, player.y - bot.y);
+                if (dist < player.radius + bot.radius) {
+                    if (player.mass > bot.mass) {
+                        player.mass += bot.mass;
+                        player.radius = Math.sqrt(player.mass);
+                        bots.splice(i, 1); // Удаляем бота
+                        spawnBot(); // Создаем нового бота
+                    } else {
+                        player.isAlive = false; 
+                        gameOverText.style.display = 'block'; 
+                        setTimeout(respawnPlayer, respawnTime);
+                    }
+                }
+
+                for (let j = 0; j < splits.length; j++) {
+                    let split = splits[j];
+                    dist = Math.hypot(split.x - bot.x, split.y - bot.y);
+                    if (dist < split.radius + bot.radius) {
+                        if (split.mass > bot.mass) {
+                            split.mass += bot.mass;
+                            split.radius = Math.sqrt(split.mass);
+                            bots.splice(i, 1); // Удаляем бота
+                            spawnBot(); // Создаем нового бота
+                        } else {
+                            player.isAlive = false; 
+                            gameOverText.style.display = 'block'; 
+                            setTimeout(respawnPlayer, respawnTime);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Проверка на столкновения с бонусными сферами
+        function checkSpheres() {
+            for (let i = spheres.length - 1; i >= 0; i--) {
+                let sphere = spheres[i];
+                let dist = Math.hypot(player.x - sphere.x, player.y - sphere.y);
+                if (dist < player.radius + sphere.radius) {
+                    player.mass += sphere.mass;
+                    player.radius = Math.sqrt(player.mass);
+                    spheres.splice(i, 1); // Удаляем сферу из массива
+                }
+            }
+        }
+
+        // Функция для рисования круга
+        function drawCircle(circle) {
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = circle.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Генерация случайного цвета
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Функция для появления бонусных сфер
+        function spawnBonusSphere() {
+            spheres.push(createBonusSphere());
+        }
+
+        // Функция для спавна новых ботов
+        function spawnBot() {
+            if (bots.length < maxBots) {
+                bots.push(createRandomBot());
+            }
+        }
+
+        // Перезапуск игрока после "Game Over"
+        function respawnPlayer() {
+            player.isAlive = true;
+            player.mass = 50; // Сбрасываем массу игрока
+            player.radius = Math.sqrt(player.mass); // Обновляем радиус игрока
+            player.x = canvas.width / 2; // Возвращаем игрока в центр
+            player.y = canvas.height / 2; // Возвращаем игрока в центр
+            gameOverText.style.display = 'none'; // Скрываем "Game Over"
+        }
+
+        // Добавление обработчика события для кнопки
+        const redirectButton = document.getElementById('redirectButton');
+        redirectButton.addEventListener('click', () => {
+            window.location.href = 'https://erdni123.github.io/index.html'; // Замените на ваш URL
+        });
+
+        // Запуск игры
+        setInterval(spawnBonusSphere, sphereSpawnTime); // Спавн сфер каждые 30 секунд
+        draw();
+    </script>
+</body>
+</html>
