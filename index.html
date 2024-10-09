@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,7 +8,11 @@
 </head>
 <body>
     <header>
-        <h1>Мебель Конаева</h1>
+        <!-- Логотип магазина -->
+        <div class="logo">
+            <img src="images/logo.png" alt="Логотип Мебель Конаева" style="width: 100px;">
+            <h1>Мебель Конаева</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -22,84 +25,120 @@
         </nav>
     </header>
 
-
-
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Чат поддержки</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-  <!-- Чат поддержки -->
-  <div class="chat-popup" id="chatBox">
-    <div class="chat-header">
-      <h4>Чат поддержки</h4>
-      <button class="close-btn" onclick="closeChat()">&times;</button>
-    </div>
-    <div class="chat-body" id="chatBody">
-      <p class="bot-message">Привет! Как я могу помочь?</p>
-    </div>
-    <div class="chat-footer">
-      <input type="text" id="userInput" placeholder="Введите ваше сообщение..." />
-      <button class="send-btn" onclick="sendMessage()">Отправить</button>
-    </div>
-  </div>
-
-  <!-- Кнопка для открытия чата -->
-  <button class="open-chat-btn" onclick="openChat()">Чат</button>
-
-  <!-- Подключение JS-файла -->
-  <script src="script.js"></script>
-</body>
-</html>
-
-
-
-
     <main>
-<section class="popular-categories">
-    <h2>Популярные категории</h2>
-    <div class="category-buttons">
-        <div class="category-card">
-            <img src="images/sit.jpg" alt="Диваны">
-            <a href="sofa.html"><button class="category-btn">Диваны</button></a>
-        </div>
-        <div class="category-card">
-            <img src="images/beds.jpg" alt="Кровати">
-            <a href="beds.html"><button class="category-btn">Кровати</button></a>
-        </div>
-        <div class="category-card">
-            <img src="images/table.jpg" alt="Столы">
-            <a href="tables.html"><button class="category-btn">Столы</button></a>
-        </div>
-        <div class="category-card">
-            <img src="images/stul.jpg" alt="Стулья">
-            <a href="chairs.html"><button class="category-btn">Стулья</button></a>
+        <!-- Популярные категории -->
+        <section class="popular-categories">
+            <h2>Популярные категории</h2>
+            <div class="category-buttons">
+                <div class="category-card">
+                    <img src="images/sofa.jpg" alt="Диваны">
+                    <a href="sofa.html"><button class="category-btn">Диваны</button></a>
+                </div>
+                <div class="category-card">
+                    <img src="images/beds.jpg" alt="Кровати">
+                    <a href="beds.html"><button class="category-btn">Кровати</button></a>
+                </div>
+                <div class="category-card">
+                    <img src="images/tables.jpg" alt="Столы">
+                    <a href="tables.html"><button class="category-btn">Столы</button></a>
+                </div>
+                <div class="category-card">
+                    <img src="images/chairs.jpg" alt="Стулья">
+                    <a href="chairs.html"><button class="category-btn">Стулья</button></a>
+                </div>
+            </div>
+        </section>
 
-        </div>
-    </div>
-</section>
-
-
+        <!-- Популярные товары -->
         <section class="featured-products">
             <h2>Популярные товары</h2>
             <div class="product-list">
+                <!-- Товар 1: Диван -->
                 <div class="product-item">
-                    <img src="images/sit.jpg" alt="Диван">
+                    <img src="images/sofa.jpg" alt="Диван 'Комфорт'">
                     <h3>Диван "Комфорт"</h3>
                     <p>Цена: 25 000 руб.</p>
+                    <button onclick="openDetails('sofa1')">Подробнее</button>
                     <button>Добавить в корзину</button>
+
+                    <!-- Оценка товара -->
+                    <div class="rating">
+                        <span>★★★★☆</span>
+                        <p>4.0 из 5</p>
+                    </div>
+
+                    <!-- Окно отзывов -->
+                    <div class="reviews">
+                        <h4>Отзывы:</h4>
+                        <p><strong>Мария:</strong> Очень мягкий и удобный диван!</p>
+                        <p><strong>Антон:</strong> Покупка оправдала все ожидания.</p>
+                    </div>
                 </div>
+
+                <!-- Товар 2: Кровать -->
                 <div class="product-item">
-                    <img src="images/beds.jpg" alt="Кровать">
+                    <img src="images/beds.jpg" alt="Кровать 'Элегант'">
                     <h3>Кровать "Элегант"</h3>
                     <p>Цена: 30 000 руб.</p>
+                    <button onclick="openDetails('bed1')">Подробнее</button>
                     <button>Добавить в корзину</button>
+
+                    <!-- Оценка товара -->
+                    <div class="rating">
+                        <span>★★★★★</span>
+                        <p>5.0 из 5</p>
+                    </div>
+
+                    <!-- Окно отзывов -->
+                    <div class="reviews">
+                        <h4>Отзывы:</h4>
+                        <p><strong>Ирина:</strong> Очень стильная и удобная кровать!</p>
+                        <p><strong>Дмитрий:</strong> Ничего лишнего, просто идеальная покупка.</p>
+                    </div>
+                </div>
+
+                <!-- Товар 3: Стол -->
+                <div class="product-item">
+                    <img src="images/tables.jpg" alt="Стол 'Классик'">
+                    <h3>Стол "Классик"</h3>
+                    <p>Цена: 15 000 руб.</p>
+                    <button onclick="openDetails('table1')">Подробнее</button>
+                    <button>Добавить в корзину</button>
+
+                    <!-- Оценка товара -->
+                    <div class="rating">
+                        <span>★★★☆☆</span>
+                        <p>3.0 из 5</p>
+                    </div>
+
+                    <!-- Окно отзывов -->
+                    <div class="reviews">
+                        <h4>Отзывы:</h4>
+                        <p><strong>Олег:</strong> Качественный и удобный стол.</p>
+                        <p><strong>Светлана:</strong> Очень довольна покупкой, всё как на фото.</p>
+                    </div>
+                </div>
+
+                <!-- Товар 4: Стул -->
+                <div class="product-item">
+                    <img src="images/chairs.jpg" alt="Стул 'Комфорт'">
+                    <h3>Стул "Комфорт"</h3>
+                    <p>Цена: 5 000 руб.</p>
+                    <button onclick="openDetails('chair1')">Подробнее</button>
+                    <button>Добавить в корзину</button>
+
+                    <!-- Оценка товара -->
+                    <div class="rating">
+                        <span>★★★★☆</span>
+                        <p>4.5 из 5</p>
+                    </div>
+
+                    <!-- Окно отзывов -->
+                    <div class="reviews">
+                        <h4>Отзывы:</h4>
+                        <p><strong>Наталья:</strong> Очень удобный стул для работы.</p>
+                        <p><strong>Александр:</strong> Прочный и стильный, рекомендую!</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -108,5 +147,62 @@
     <footer>
         <p>Контакты: +7 (123) 456-78-90 | konaev@mebelshop.ru</p>
     </footer>
+
+    <!-- Подробное описание товара (модальное окно) -->
+    <div id="product-details" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDetails()">&times;</span>
+            <div id="product-info"></div>
+        </div>
+    </div>
+
+    <!-- Подключение скрипта -->
+    <script>
+        // Модальное окно с подробной информацией о товаре
+        function openDetails(productId) {
+            var productInfo = {
+                "sofa1": {
+                    "name": "Диван 'Комфорт'",
+                    "description": "Этот диван сочетает в себе стиль и комфорт. Он идеально подходит для гостиной, обеспечивая мягкость и удобство на долгие годы.",
+                    "price": "25 000 руб.",
+                    "image": "images/sofa.jpg"
+                },
+                "bed1": {
+                    "name": "Кровать 'Элегант'",
+                    "description": "Элегантная кровать с прочным каркасом и мягким изголовьем. Идеальный выбор для стильной спальни.",
+                    "price": "30 000 руб.",
+                    "image": "images/beds.jpg"
+                },
+                "table1": {
+                    "name": "Стол 'Классик'",
+                    "description": "Классический стол, который подходит как для работы, так и для обеда. Легко сочетается с любым интерьером.",
+                    "price": "15 000 руб.",
+                    "image": "images/tables.jpg"
+                },
+                "chair1": {
+                    "name": "Стул 'Комфорт'",
+                    "description": "Прочный стул с эргономичной спинкой для максимального комфорта при сидении.",
+                    "price": "5 000 руб.",
+                    "image": "images/chairs.jpg"
+                }
+            };
+
+            var product = productInfo[productId];
+            var modal = document.getElementById('product-details');
+            var productContent = `
+                <h2>${product.name}</h2>
+                <img src="${product.image}" alt="${product.name}">
+                <p>${product.description}</p>
+                <p>Цена: ${product.price}</p>
+            `;
+
+            document.getElementById('product-info').innerHTML = productContent;
+            modal.style.display = 'block';
+        }
+
+        function closeDetails() {
+            document.getElementById('product-details').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
