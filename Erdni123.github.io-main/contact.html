@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="style.css"> <!-- Подключаем файл стилей -->
+</head>
+<body>
+    <header>
+        <h1>Контакты</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Свяжитесь с нами</h2>
+            <p>Если у вас возникли вопросы, не стесняйтесь обращаться к нам!</p>
+            <ul>
+                <li>Телефон: +7 (123) 456-78-90</li>
+                <li>Email: konaev@mebelshop.ru</li>
+                <li>Адрес: г. Москва, ул. Конаевская, д. 10</li>
+                <li>Часы работы: Пн-Пт, с 9:00 до 18:00</li>
+            </ul>
+        </section>
+
+        <section class="contact-form">
+            <h2>Форма обратной связи</h2>
+            <form action="submit_form.php" method="post">
+                <label for="name">Имя:</label><br>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="message">Сообщение:</label><br>
+                <textarea id="message" name="message" rows="5" required></textarea><br>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+
+        <section class="map">
+            <h2>Мы на карте</h2>
+            <!-- Вставляем Google карту -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.581830739441!2d37.62159091602155!3d55.75582598055366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6f8e6b9b9eab2d9!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1610000000000!5m2!1sru!2sru"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Мебель Конаева. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Каталог мебели</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="products">
+            <!-- Пример товара с кнопкой "Добавить в корзину" -->
+            <article class="product-item">
+                <img src="images/sofa.jpg" alt="Диван 'Комфорт'" width="300">
+                <h2>Диван "Комфорт"</h2>
+                <p>Цена: 25 000 руб.</p>
+                <button onclick="addToCart('Диван Комфорт', 25000)">Добавить в корзину</button>
+            </article>
+
+            <article class="product-item">
+                <img src="images/bed.jpg" alt="Кровать 'Элегант'" width="300">
+                <h2>Кровать "Элегант"</h2>
+                <p>Цена: 30 000 руб.</p>
+                <button onclick="addToCart('Кровать Элегант', 30000)">Добавить в корзину</button>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Контакты: +7 (123) 456-78-90 | konaev@mebelshop.ru</p>
+    </footer>
+
+    <!-- JavaScript для работы корзины -->
+    <script>
+        // Функция для добавления товаров в корзину
+        function addToCart(productName, productPrice) {
+            // Получаем данные корзины из localStorage или создаем пустую корзину
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Добавляем новый товар в корзину
+            cart.push({name: productName, price: productPrice});
+
+            // Сохраняем обновленную корзину в localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Обновляем количество товаров в корзине на странице
+            updateCartCount();
+        }
+
+        // Функция для обновления количества товаров в корзине
+        function updateCartCount() {
+            // Получаем корзину из localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Обновляем счетчик количества товаров на странице
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        // Обновляем счетчик при загрузке страницы
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>
