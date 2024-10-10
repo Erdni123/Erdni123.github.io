@@ -14,8 +14,7 @@
             <h1>Мебель Конаева</h1>
         </div>
         <nav>
-        <h1>Каталог мебели</h1>
-        <nav>
+            <h1>Каталог мебели</h1>
             <ul>
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="catalog.html">Каталог</a></li>
@@ -28,15 +27,6 @@
     </header>
 
     <main>
-        <!-- Кнопки для фильтрации --
-        <div class="filter-buttons">
-            <button onclick="filterProducts('all')">Все</button>
-            <button onclick="filterProducts('sofa')">Диваны</button>
-            <button onclick="filterProducts('bed')">Кровати</button>
-            <button onclick="filterProducts('table')">Столы</button>
-            <button onclick="filterProducts('chair')">Стулья</button>
-        </div>
-
         <!-- Секция товаров -->
         <section class="products">
             <!-- Товар "Диван" -->
@@ -44,7 +34,7 @@
                 <img src="images/sofa.jpg" alt="Диван 'Комфорт'" width="300">
                 <h2>Диван "Комфорт"</h2>
                 <p>Цена: 25 000 руб.</p>
-                <button onclick="addToCart('Диван Комфорт', 25000)">Добавить в корзину</button>
+                <a href="product.html?name=Диван%20Комфорт&price=25000"><button>Подробнее</button></a>
             </article>
 
             <!-- Товар "Кровать" -->
@@ -52,7 +42,7 @@
                 <img src="images/beds.jpg" alt="Кровать 'Элегант'" width="300">
                 <h2>Кровать "Элегант"</h2>
                 <p>Цена: 30 000 руб.</p>
-                <button onclick="addToCart('Кровать Элегант', 30000)">Добавить в корзину</button>
+                <a href="product.html?name=Кровать%20Элегант&price=30000"><button>Подробнее</button></a>
             </article>
 
             <!-- Товар "Стол" -->
@@ -60,7 +50,7 @@
                 <img src="images/tables.jpg" alt="Стол 'Уютный'" width="300">
                 <h2>Стол "Уютный"</h2>
                 <p>Цена: 15 000 руб.</p>
-                <button onclick="addToCart('Стол Уютный', 15000)">Добавить в корзину</button>
+                <a href="product.html?name=Стол%20Уютный&price=15000"><button>Подробнее</button></a>
             </article>
 
             <!-- Товар "Стул" -->
@@ -68,7 +58,7 @@
                 <img src="images/chairs.jpg" alt="Стул 'Классика'" width="300">
                 <h2>Стул "Классика"</h2>
                 <p>Цена: 5 000 руб.</p>
-                <button onclick="addToCart('Стул Классика', 5000)">Добавить в корзину</button>
+                <a href="product.html?name=Стул%20Классика&price=5000"><button>Подробнее</button></a>
             </article>
         </section>
     </main>
@@ -77,37 +67,7 @@
         <p>Контакты: +7 (123) 456-78-90 | konaev@mebelshop.ru</p>
     </footer>
 
-    <!-- JavaScript для фильтрации товаров -->
     <script>
-        // Функция для фильтрации товаров по категориям
-        function filterProducts(category) {
-            // Получаем все товары
-            let products = document.getElementsByClassName('product-item');
-
-            // Проходим по каждому товару
-            for (let i = 0; i < products.length; i++) {
-                // Если категория "all", показываем все товары
-                if (category === 'all') {
-                    products[i].style.display = 'block';
-                } else {
-                    // Показываем только товары, которые соответствуют выбранной категории
-                    if (products[i].classList.contains(category)) {
-                        products[i].style.display = 'block';
-                    } else {
-                        products[i].style.display = 'none';
-                    }
-                }
-            }
-        }
-
-        // Функция для добавления товаров в корзину
-        function addToCart(productName, productPrice) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push({ name: productName, price: productPrice });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-        }
-
         // Функция для обновления количества товаров в корзине
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -119,3 +79,4 @@
     </script>
 </body>
 </html>
+

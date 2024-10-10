@@ -13,18 +13,18 @@
             <img src="images/logo.png" alt="Логотип Мебель Конаева" style="width: 100px;">
         </div>
         <nav>
-        <h1>Каталог мебели</h1>
-        <nav>
-           <h1>Корзина</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-                <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
-                <li><a href="contact.html">Контакты</a></li>
-                <li><a href="games.html">Игры</a></li>
-                <li><a href="login.html">Вход</a></li>
-            </ul>
+            <h1>Каталог мебели</h1>
+            <nav>
+                <h1>Корзина</h1>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html">Корзина (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="contact.html">Контакты</a></li>
+                    <li><a href="games.html">Игры</a></li>
+                    <li><a href="login.html">Вход</a></li>
+                </ul>
+            </nav>
         </nav>
     </header>
 
@@ -69,11 +69,11 @@
             document.getElementById('cart-count').innerText = cart.length;
         }
 
-        // Функция для оформления заказа (пока просто очищает корзину)
+        // Функция для оформления заказа (очищает корзину и перенаправляет на страницу оплаты)
         function checkout() {
-            alert("Ваш заказ оформлен!");
             localStorage.removeItem('cart'); // Очищаем корзину
-            loadCart(); // Обновляем корзину
+            loadCart(); // Обновляем отображение корзины после очистки
+            window.location.href = 'checkout.html'; // Перенаправление на страницу оплаты
         }
 
         // Загрузка корзины при загрузке страницы
@@ -81,4 +81,3 @@
     </script>
 </body>
 </html>
-
