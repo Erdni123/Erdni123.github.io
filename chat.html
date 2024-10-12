@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат-бот</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили для чат-бота */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .message.bot {
+            background-color: #f1f1f1;
+        }
+
+        .message.user {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Логотип" style="width: 100px;">
+            <h1>Мебель Конаева</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+                <li><a href="games.html">Игры</a></li>
+                <li><a href="chat.html">Чат-бот</a></li>
+                <li><a href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Добро пожаловать на наш сайт!</h2>
+    </main>
+
+    <!-- Контейнер для чат-бота -->
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="message bot">Здравствуйте! Чем могу помочь?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Введите сообщение...">
+            <button onclick="sendMessage()">Отправить</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Контакты: +7 (123) 456-78-90 | konaev@mebelshop.ru</p>
+    </footer>
+
+    <script src="chatbot.js"></script>
+</body>
+</html>
